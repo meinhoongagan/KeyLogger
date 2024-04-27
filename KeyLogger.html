@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyLogger</title>
+</head>
+<body>
+    <div style="display:flex; width: 1200px; justify-content: center; align-items: center; margin-top: 50px;">
+        <h1 style="  border: solid black; width:max-content; padding:5px;  border-radius: 10px; ">Key Logger</h1>
+    </div>
+    <div>
+        <div style="display:flex; width:1200px; justify-content:center; ">
+            <button style="margin-left: 30px; padding: 10px;  width: 250px; font-size: larger; margin-top: 50px;  border-radius: 100px;" id="start-log">start logging key</button>
+            <button style="margin-left: 30px; padding: 10px;  width: 250px; font-size: larger; margin-top: 50px;  border-radius: 100px; "id="stop-log">stop logging key</button>
+        </div>
+        <div style="display:flex; width:1200px; justify-content:center; ">
+            <div style="margin-left: 30px; padding: 10px;  width: 250px; font-size: larger; margin-top: 50px;  border-radius: 100px; background-color: orange; height: 40px; font-weight: bold;" id="display-key"></div>
+            <div style="margin-left: 30px; padding: 10px;  width: 250px; font-size: larger; margin-top: 50px;  border-radius: 100px; background-color: gray; height: 40px; font-weight: bold;" id="display-state"></div>
+        </div>
+       
+    </div>
+    <script>
+        const start_log=document.getElementById("start-log");
+        const stop_log=document.getElementById("stop-log");
+        const display_key=document.getElementById("display-key");
+        const display_state=document.getElementById("display-state");
+        start_log.addEventListener("click",()=>{
+            document.addEventListener("keydown",handledown);
+            document.addEventListener("keyup",handleup);
+            stop_log.style.background='white';
+            start_log.style.background='gray';
+        });
+        stop_log.addEventListener("click",()=>{
+            document.removeEventListener("keydown",handledown);
+            document.removeEventListener("keyup",handleup);
+            display_key.textContent="";
+            // console.log(e.key);
+            display_state.textContent="";
+            stop_log.style.background='gray';
+            start_log.style.background='white';
+            // stop_log.style.display=true;
+        });
+            function handledown(e){
+                display_key.textContent=`Key ${e.key} is presses down`;
+            // console.log(e.key);
+            display_state.textContent=`Key is down`;
+        }
+        function handleup(e){
+            // console.log(e.key);
+            display_key.textContent=`Key ${e.key} is presses up`;
+            display_state.textContent=`Key is up`;
+        }
+    
+    </script>
+</body>
+</html>
